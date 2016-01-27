@@ -1,0 +1,30 @@
+{
+  "name": "node-sails-123-factor-proto",
+  "version": "1.0.0",
+  "description": "a basic prototype for different levels of user auth",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/camsjams/node-sails-123-factor-proto.git"
+  },
+  "keywords": [
+    "node",
+    "sails",
+    "authentication"
+  ],
+  "author": "Cameron Manavian",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/camsjams/node-sails-123-factor-proto/issues"
+  },
+  "homepage": "https://github.com/camsjams/node-sails-123-factor-proto",
+  "dependencies": {
+    "passport": "^0.3.2",
+    "passport-jwt": "^1.2.1",
+    "passport-local": "^1.0.0",
+    "sails": "^0.11.4"
+  }
+}
