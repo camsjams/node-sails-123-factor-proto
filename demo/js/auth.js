@@ -1,5 +1,5 @@
 (function($, doc) {
-    var serverHost = 'http://192.168.33.11:1337';
+    var serverHost = 'http://192.168.33.10:1337';
     var $mode = $('h2 .mode');
     var $preLog = $('pre').html('initialized!\n');
     var authHeader;
