@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
 
-    <title>Login test</title>
+    <title>Auth test</title>
 
     <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 
@@ -16,19 +16,20 @@
 <body>
 <header>
     <h1>Test your auth might</h1>
-    <h2>Mode:<span class="mode"></span></h2>
+    <h2>Mode: <span class="mode"></span></h2>
 </header>
 <div id="main">
-    <form id="reg">
+    <form id="signup">
         <ul>
             <li>
-                <input required value="" type="text" min="3" maxlength="50" placeholder="username"/>
+                <input required value="" type="text" name="email" min="3" maxlength="50" placeholder="email"/>
             </li>
             <li>
-                <input required value="" type="password" min="6" maxlength="255" placeholder="password"/>
+                <input required value="" type="password" name="password" min="6" maxlength="255"
+                       placeholder="password"/>
             </li>
             <li>
-                <input type="submit" value="Register"/>
+                <input type="submit" value="Signup"/>
             </li>
         </ul>
     </form>
@@ -36,10 +37,11 @@
     <form id="login">
         <ul>
             <li>
-                <input required value="" type="text" min="3" maxlength="50" placeholder="username"/>
+                <input required value="" type="text" name="email" min="3" maxlength="50" placeholder="email"/>
             </li>
             <li>
-                <input required value="" type="password" min="6" maxlength="255" placeholder="password"/>
+                <input required value="" type="password" name="password" min="6" maxlength="255"
+                       placeholder="password"/>
             </li>
             <li>
                 <input type="submit" value="Login"/>
@@ -47,7 +49,11 @@
         </ul>
     </form>
 
+    <a href="#" id="testProtected">Test Protected Request</a>
+
     <pre>output here ...</pre>
+    <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="js/base64_decode.js"></script>
     <script type="text/javascript" src="js/auth.js"></script>
 </div>
 

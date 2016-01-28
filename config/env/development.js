@@ -12,13 +12,17 @@
 
 module.exports = {
 
-  /***************************************************************************
-   * Set the default database connection for models in the development       *
-   * environment (see config/connections.js and config/models.js )           *
-   ***************************************************************************/
-
-  // models: {
-  //   connection: 'someMongodbServer'
-  // }
+    /***************************************************************************
+     * Toggle features in the development environment
+     ***************************************************************************/
+    features: {
+        knowledgeFactor: true,
+        possessionFactor: false,
+        inherentFactor: false,
+        sendErrorsInResponse: true
+    },
+    models: {
+        migrate: 'drop'
+    }
 
 };
