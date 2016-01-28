@@ -17,12 +17,12 @@ module.exports = {
      ***************************************************************************/
     features: {
         knowledgeFactor: true,
-        possessionFactor: false,
+        possessionFactor: true,
         inherentFactor: false,
         sendErrorsInResponse: true
     },
     models: {
-        migrate: 'drop'
+        migrate: 'safe'
     }
 
 };

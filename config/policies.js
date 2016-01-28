@@ -22,7 +22,9 @@ module.exports.policies = {
     '*': ['isAuthenticated'],
 
     AuthController: {
-        '*': true
+        '*': true,
+        'totp_signup': 'isAuthenticated',
+        'totp_login': 'isAuthenticated'
     },
     PingController: {
         '*': 'hasToken',

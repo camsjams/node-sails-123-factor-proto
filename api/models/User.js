@@ -18,6 +18,9 @@ module.exports = {
         password: {
             type: 'string'
         },
+        totpKey: {
+            type: 'string'
+        },
         email: {
             type: 'email',
             required: true,
@@ -26,7 +29,7 @@ module.exports = {
         toJSON: function() {
             var obj = this.toObject();
             delete obj.password;
-            //delete obj.email;
+            delete obj.totpKey;
             return obj;
         }
     },

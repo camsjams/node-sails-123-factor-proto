@@ -12,6 +12,9 @@
         $.getJSON(serverHost + '/ping/factors')
             .done(function(data) {
                 $mode.html(data.factors);
+            })
+            .fail(function() {
+                $mode.html('API down!');
             });
     });
 
@@ -28,15 +31,31 @@
     }
 
     function registerDoodads() {
-        
+        $('#testProtected').on('click', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                    url: serverHost + '/ping/protected',
+                    method: 'GET',
+                    headers: authHeader
+                })
+                .done(function(data) {
+                    logMsg('\n\ttestProtected: authorized, found response:' + data);
+                })
+                .fail(function(data) {
+                    logMsg('\n\ttestProtected: not authorized, found response:' + data.responseText);
+                });
+        });
     }
 
     function registerForms() {
         var $signup = $('#signup');
         var $login = $('#login');
+        var $totp_setup = $('#totp_signup');
+        var $totp_login = $('#totp_login');
 
         function onError(err) {
-            logOut(
+            logMsg(
                 '\n\n--<strong style="color:red">ERROR</strong>--\n' + err.responseJSON.error + ': ' +
                 prettyPrint(err.responseJSON) +
                 '\n--<strong style="color:red">ERROR</strong>--\n'
@@ -48,13 +67,12 @@
 
             $.post(serverHost + '/auth/signup',
                 {
-                    signup: {
-                        email: $signup.find('input[name=email]').val(),
-                        password: $signup.find('input[name=password]').val()
-                    }
+                    email: $signup.find('input[name=email]').val(),
+                    password: $signup.find('input[name=password]').val()
                 })
                 .done(function(data) {
-                    logOut(
+                    updateAuthHeader(data.token);
+                    logMsg(
                         '\n<strong>SIGNED UP USER</strong>\n' +
                         'with JWT token:' + data.token.substring(0, 15) + '...' +
                         '\ndecrypted: ' + '\n' + prettyPrint(decodeJwt(data.token))
@@ -68,14 +86,61 @@
 
             $.post(serverHost + '/auth/login',
                 {
-                    login: {
-                        email: $login.find('input[name=email]').val(),
-                        password: $login.find('input[name=password]').val()
+                    email: $login.find('input[name=email]').val(),
+                    password: $login.find('input[name=password]').val()
+                })
+                .done(function(data) {
+                    var state = 'LOGGED IN USER';
+                    updateAuthHeader(data.token);
+                    if (data.possessionFactor !== undefined) {
+                        state = 'LOGGED IN USER - NEEDS POSSESSION';
+                        if (data.possessionFactor) {
+                            $login.append('<span id="lert">Please enter your token below</span>')
+                                .find('#lert').fadeOut(5000);
+                        } else {
+                            $login.append('<span id="lert">Please setup your token below</span>')
+                                .find('#lert').fadeOut(5000);
+                            $totp_setup.trigger('submit');
+                        }
+                    }
+                    logMsg(
+                        '\n<strong>' + state + '</strong>\n' +
+                        'with JWT token:' + data.token.substring(0, 15) + '...' +
+                        '\ndecrypted: ' + '\n' + prettyPrint(decodeJwt(data.token))
+                    );
+                })
+                .fail(onError)
+        });
+
+        $totp_setup.on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                    url: serverHost + '/auth/totp_signup',
+                    method: 'GET',
+                    headers: authHeader
+                })
+                .done(function(data) {
+                    $totp_setup.find('img').attr('src', data.qrUrl)
+                })
+                .fail(onError);
+        });
+
+        $totp_login.on('submit', function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                    url: serverHost + '/auth/totp_login',
+                    method: 'POST',
+                    headers: authHeader,
+                    data: {
+                        code: $totp_login.find('input[name=code]').val()
                     }
                 })
                 .done(function(data) {
-                    logOut(
-                        '\n<strong>LOGGED IN USER</strong>\n' +
+                    updateAuthHeader(data.token);
+                    logMsg(
+                        '\n<strong>LOGGED IN USER WITH POSSESSION</strong>\n' +
                         'with JWT token:' + data.token.substring(0, 15) + '...' +
                         '\ndecrypted: ' + '\n' + prettyPrint(decodeJwt(data.token))
                     );
@@ -88,7 +153,7 @@
 
         function logJqueryAjax(req, msg) {
             msg = msg || '';
-            logOut('\n' + req.type + ' ' + req.url.replace(serverHost, '') + msg);
+            logMsg('\n' + req.type + ' ' + req.url.replace(serverHost, '') + msg);
         }
 
         $(doc).ajaxSend(function() {
@@ -96,11 +161,12 @@
         });
 
         $(doc).ajaxComplete(function() {
-            logJqueryAjax(arguments[2], ' DONE');
+            logJqueryAjax(arguments[2], ' DONE:' + arguments[1].statusText);
         });
+
     }
 
-    function logOut(msg) {
+    function logMsg(msg) {
         $preLog.append(msg);
     }
 
