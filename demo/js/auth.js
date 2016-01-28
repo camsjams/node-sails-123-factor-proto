@@ -1,3 +1,6 @@
+var jQuery = jQuery || {};
+var base64Decode = base64_decode || function() {};
+
 (function($, doc) {
     var serverHost = 'http://192.168.33.10:1337';
     var $mode = $('h2 .mode');
@@ -14,7 +17,7 @@
                 $mode.html(data.factors);
             })
             .fail(function() {
-                $mode.html('API down!');
+                $mode.html('<em class="err">API is down!</em>');
             });
     });
 
@@ -23,7 +26,7 @@
     }
 
     function decodeJwt(token) {
-        return JSON.parse(base64_decode(token.split('.')[1]));
+        return JSON.parse(base64Decode(token.split('.')[1]));
     }
 
     function prettyPrint(obj) {
@@ -51,14 +54,14 @@
     function registerForms() {
         var $signup = $('#signup');
         var $login = $('#login');
-        var $totp_setup = $('#totp_signup');
-        var $totp_login = $('#totp_login');
+        var $totpSetup = $('#totp_signup');
+        var $totpLogin = $('#totp_login');
 
         function onError(err) {
             logMsg(
-                '\n\n--<strong style="color:red">ERROR</strong>--\n' + err.responseJSON.error + ': ' +
+                '\n\n--<strong class="err">ERROR</strong>--\n' + err.responseJSON.error + ': ' +
                 prettyPrint(err.responseJSON) +
-                '\n--<strong style="color:red">ERROR</strong>--\n'
+                '\n--<strong class="err">ERROR</strong>--\n'
             );
         }
 
@@ -78,7 +81,7 @@
                         '\ndecrypted: ' + '\n' + prettyPrint(decodeJwt(data.token))
                     );
                 })
-                .fail(onError)
+                .fail(onError);
         });
 
         $login.on('submit', function(e) {
@@ -100,7 +103,7 @@
                         } else {
                             $login.append('<span id="lert">Please setup your token below</span>')
                                 .find('#lert').fadeOut(5000);
-                            $totp_setup.trigger('submit');
+                            $totpSetup.trigger('submit');
                         }
                     }
                     logMsg(
@@ -109,10 +112,10 @@
                         '\ndecrypted: ' + '\n' + prettyPrint(decodeJwt(data.token))
                     );
                 })
-                .fail(onError)
+                .fail(onError);
         });
 
-        $totp_setup.on('submit', function(e) {
+        $totpSetup.on('submit', function(e) {
             e.preventDefault();
 
             $.ajax({
@@ -121,12 +124,12 @@
                     headers: authHeader
                 })
                 .done(function(data) {
-                    $totp_setup.find('img').attr('src', data.qrUrl)
+                    $totpSetup.find('img').attr('src', data.qrUrl);
                 })
                 .fail(onError);
         });
 
-        $totp_login.on('submit', function(e) {
+        $totpLogin.on('submit', function(e) {
             e.preventDefault();
 
             $.ajax({
@@ -134,7 +137,7 @@
                     method: 'POST',
                     headers: authHeader,
                     data: {
-                        code: $totp_login.find('input[name=code]').val()
+                        code: $totpLogin.find('input[name=code]').val()
                     }
                 })
                 .done(function(data) {
@@ -145,7 +148,7 @@
                         '\ndecrypted: ' + '\n' + prettyPrint(decodeJwt(data.token))
                     );
                 })
-                .fail(onError)
+                .fail(onError);
         });
     }
 

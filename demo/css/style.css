@@ -15,7 +15,7 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
 
 body {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 ul, ol, li {
@@ -49,6 +49,12 @@ fieldset {
     padding: 2%;
     margin: 1% 0;
 }
+.fatal {
+    color: #c00;
+}
+.err {
+    color: #f00;
+}
 
 header {
     margin-top: 1%;
@@ -60,6 +66,13 @@ form,
     margin: 1% 0;
     padding: 3%;
     border-radius: 3px;
+}
+
+form {
+    float: left;
+    width: 40%;
+    height: 100px;
+    margin-right: 1%;
 }
 
 pre {
