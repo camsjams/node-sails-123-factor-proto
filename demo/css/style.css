@@ -1,0 +1,59 @@
+@charset "UTF-8";
+/* CSS Document */
+
+/* FLAG=reset
+ ----------------------------------------------- */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0px;
+    padding: 0px;
+    border: 0;
+    font-size: inherit;
+    font-style: normal;
+    text-decoration: none;
+    outline: none;
+}
+
+body {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.2rem;
+}
+
+li {
+    margin: 1% 0;
+}
+
+header,
+div {
+    width: 50%;
+    margin: 0 auto;
+}
+
+header {
+    margin-top: 1%;
+}
+
+form {
+    border: 1px solid #ccc;
+    margin: 1% 0;
+    padding: 3%;
+    border-radius: 3px;
+}
+
+pre {
+    background: #eee;
+    border: 1px solid #ccc;
+    padding: 1%;
+    font-size: .8rem;
+}
