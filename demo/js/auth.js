@@ -4,7 +4,8 @@ var base64Decode = base64_decode || function() {};
 (function($, doc) {
     var serverHost = 'http://192.168.33.10:1337';
     var $mode = $('h2 .mode');
-    var $preLog = $('pre').html('initialized!\n');
+    var $preLog = $('pre#output').html('initialized!\n');
+    var $preJwt = $('pre#jwt');
     var authHeader;
 
     $(doc).ready(function() {
@@ -23,6 +24,7 @@ var base64Decode = base64_decode || function() {};
 
     function updateAuthHeader(token) {
         authHeader = {'Authorization': 'JWT ' + token};
+        $preJwt.html('Current token:<em>' + token + '</em>');
     }
 
     function decodeJwt(token) {
@@ -77,8 +79,7 @@ var base64Decode = base64_decode || function() {};
                     updateAuthHeader(data.token);
                     logMsg(
                         '\n<strong>SIGNED UP USER</strong>\n' +
-                        'with JWT token:' + data.token.substring(0, 15) + '...' +
-                        '\ndecrypted: ' + '\n' + prettyPrint(decodeJwt(data.token))
+                        'with JWT decrypted:\n' + prettyPrint(decodeJwt(data.token))
                     );
                 })
                 .fail(onError);
@@ -108,8 +109,7 @@ var base64Decode = base64_decode || function() {};
                     }
                     logMsg(
                         '\n<strong>' + state + '</strong>\n' +
-                        'with JWT token:' + data.token.substring(0, 15) + '...' +
-                        '\ndecrypted: ' + '\n' + prettyPrint(decodeJwt(data.token))
+                        'with JWT decrypted:\n' + prettyPrint(decodeJwt(data.token))
                     );
                 })
                 .fail(onError);

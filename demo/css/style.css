@@ -81,3 +81,7 @@ pre {
     padding: 1%;
     font-size: .8rem;
 }
+
+#jwt em {
+    font-size: .6rem;
+}
