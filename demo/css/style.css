@@ -87,8 +87,12 @@ form,
 form {
     float: left;
     width: 40%;
-    height: 150px;
+    height: 100px;
     margin-right: 1%;
+}
+#totp_signup,
+#totp_login {
+    height: 200px;
 }
 
 pre {
