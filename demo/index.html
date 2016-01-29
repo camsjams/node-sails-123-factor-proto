@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Auth test</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+</head>
+
+<body>
+<header>
+    <h1>Test your auth might</h1>
+    <h2>Mode: <span class="mode"><em class="fatal">loading ...</em></span></h2>
+</header>
+<div id="main">
+    <fieldset>
+        <legend>Forms</legend>
+        <form id="signup">
+            <ul>
+                <li>
+                    <input required value="" type="text" name="email" min="3" maxlength="50" placeholder="email"/>
+                </li>
+                <li>
+                    <input required value="" type="password" name="password" min="6" maxlength="255"
+                           placeholder="password"/>
+                </li>
+                <li>
+                    <input type="submit" value="Signup"/>
+                </li>
+            </ul>
+        </form>
+
+        <form id="login">
+            <ul>
+                <li>
+                    <input required value="" type="text" name="email" min="3" maxlength="50" placeholder="email"/>
+                </li>
+                <li>
+                    <input required value="" type="password" name="password" min="6" maxlength="255"
+                           placeholder="password"/>
+                </li>
+                <li>
+                    <input type="submit" value="Login"/>
+                </li>
+            </ul>
+        </form>
+
+        <form id="totp_signup">
+            <ul>
+                <li>
+                    <img src="https://placeholdit.imgix.net/~text?txtsize=24&w=50&h=50&txt=qr%20here"/>
+                </li>
+                <li>
+                    <input type="submit" value="Setup my totp"/>
+                </li>
+            </ul>
+        </form>
+
+        <form id="totp_login">
+            <ul>
+                <ul>
+                    <li>
+                        <input required value="" type="text" name="code" min="3" maxlength="6" placeholder="code"/>
+                    </li>
+                    <li>
+                        <input type="submit" value="Login with my totp"/>
+                    </li>
+                </ul>
+            </ul>
+        </form>
+    </fieldset>
+
+    <fieldset>
+        <legend>Doodads</legend>
+        <a href="#" id="testProtected">Test Protected Request</a>
+    </fieldset>
+
+    <fieldset>
+        <legend>JWT</legend>
+        <pre id="jwt"></pre>
+    </fieldset>
+
+    <fieldset>
+        <legend>Output</legend>
+        <pre id="output">output here ...</pre>
+    </fieldset>
+    <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+    <script type="text/javascript" src="js/base64_decode.js"></script>
+    <script type="text/javascript" src="js/auth.js"></script>
+</div>
+
+</body>
+</html>

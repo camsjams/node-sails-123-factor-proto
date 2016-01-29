@@ -1,0 +1,20 @@
+{
+  "name": "node-sails-123-factor-proto",
+  "version": "0.0.1",
+  "description": "Better Know Your Factors",
+  "main": "index.html",
+  "authors": [
+    "Cameron Manavian",
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "reveal.js": "~3.1.0"
+  }
+}
