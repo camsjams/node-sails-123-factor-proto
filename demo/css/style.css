@@ -24,6 +24,7 @@ ul, ol, li {
 
 h1 {
     font-size: 2rem;
+    text-align: center;
 }
 
 h2 {
@@ -38,10 +39,23 @@ li {
     margin: 1% 0;
 }
 
-header,
-div {
+header, footer {
     width: 50%;
     margin: 0 auto;
+    background: #ccc;
+    border: 1px solid #333;
+    padding: 1%;
+}
+
+#main,
+#sidebar {
+    float: left;
+    width: 47%;
+    margin: 1%;
+}
+
+footer {
+    clear: left;
 }
 
 fieldset {
@@ -49,9 +63,11 @@ fieldset {
     padding: 2%;
     margin: 1% 0;
 }
+
 .fatal {
     color: #c00;
 }
+
 .err {
     color: #f00;
 }
@@ -61,7 +77,7 @@ header {
 }
 
 form,
-#doodads{
+#doodads {
     border: 1px solid #ccc;
     margin: 1% 0;
     padding: 3%;
