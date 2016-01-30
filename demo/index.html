@@ -16,7 +16,6 @@
 <body>
 <header>
     <h1>Test your auth might</h1>
-    <h2>Mode: <span class="mode"><em class="fatal">loading ...</em></span></h2>
 </header>
 <div id="main">
     <fieldset>
@@ -80,7 +79,9 @@
         <legend>Doodads</legend>
         <a href="#" id="testProtected">Test Protected Request</a>
     </fieldset>
+</div>
 
+<div id="sidebar">
     <fieldset>
         <legend>JWT</legend>
         <pre id="jwt"></pre>
@@ -88,12 +89,16 @@
 
     <fieldset>
         <legend>Output</legend>
+        <a id="clear" href="#">clear output</a>
         <pre id="output">output here ...</pre>
     </fieldset>
-    <script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
-    <script type="text/javascript" src="js/base64_decode.js"></script>
-    <script type="text/javascript" src="js/auth.js"></script>
 </div>
+<footer>
+    <h2 id="mode">Mode: <span class="mode"><em class="fatal">loading ...</em></span></h2>
+</footer>
+<script type="text/javascript" src="js/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="js/base64_decode.js"></script>
+<script type="text/javascript" src="js/auth.js"></script>
 
 </body>
 </html>

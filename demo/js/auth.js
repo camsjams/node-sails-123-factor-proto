@@ -154,6 +154,11 @@ var base64Decode = base64_decode || function() {};
 
     function registerLogEvents() {
 
+        $('#clear').on('click', function(e) {
+            e.preventDefault();
+            $preLog.html('');
+        });
+
         function logJqueryAjax(req, msg) {
             msg = msg || '';
             logMsg('\n' + req.type + ' ' + req.url.replace(serverHost, '') + msg);

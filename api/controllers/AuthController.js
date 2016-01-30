@@ -83,7 +83,6 @@ module.exports = {
 
     totp_signup: function(req, res) {
         if (req.user && req.user.email) {
-            console.log('req.user.id', req.user);
             User.findOne({id: req.user.id})
                 .exec(function(err, user) {
                     if (err) {
@@ -96,7 +95,6 @@ module.exports = {
                     delete user.password;
                     user.totpKey = secret + '';
                     user.save(function(error) {
-                        console.log('error', error);
                         if (error) {
                             return res.serverError();
                         }
